@@ -2,7 +2,7 @@ import telebot
 # import pyttsx3
 import time
 import random
-import requests
+# import requests
 
 
 
@@ -33,67 +33,148 @@ bot = telebot.TeleBot('8892087367:AAFzASUnMSeorbnu-KYUgZ1ZbvLyaocu-Ms')
 
 
 
+
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.chat.id, "Привет")
 
 
-@bot.message_handler(commands=['How to prevent'])
+@bot.message_handler(commands=['Как предотвратить'])
 def How_to_prevent(message):
-    bot.send_message(message.chat.id, "Привет")
+    bot.send_message(message.chat.id, "Уделять больше внимания экологии")
 
 
-@bot.message_handler(commands=['Why is global warming accelerating?'])
+@bot.message_handler(commands=['Почему глобальное потепление ускоряется?'])
 def accelerates(message):
-    bot.send_message(message.chat.id, "Привет")
+    bot.send_message(message.chat.id, "Глобальное потепление ускоряется из-за рекордных выбросов парниковых газов и сокращения лесных массивов.")
 
 
-@bot.message_handler(commands=['Why are some countries still unable to significantly reduce emissions?'])
+@bot.message_handler(commands=['Почему некоторые страны до сих пор не могут существенно снизить выбросы?'])
 def countries_to_reduce_emissions(message):
-    bot.send_message(message.chat.id, "Привет")
+    bot.send_message(message.chat.id, "Некоторые страны до сих пор не могут существенно снизить выбросы из-за сильной зависимости от ископаемого топлива и нехватки финансирования для перехода на зелёную энергию.")
 
 
 @bot.message_handler(commands=['help'])
 def help(message):
-    bot.send_message(message.chat.id, "start, random_advice, How to prevent, Why is global warming accelerating?, Why are some countries still unable to significantly reduce emissions?, ")
+    bot.send_message(message.chat.id, "start, random_advice, start_play, Как предотвратить, 
+    Почему глобальное потепление ускоряется?, 
+    Почему некоторые страны до сих пор не могут существенно снизить выбросы?, 
+    Почему некоторые технологии, например, определенные методы геоинженерии, вызывают споры в научном сообществе?, 
+    Какие барьеры мешают более быстрому внедрению *зелёных* технологий?", 
+    "Почему важно распространять знания о климате и привлекать других?", 
+    "Как вы можете сократить свой личный углеродный след в повседневной жизни?", 
+    "Как изменения климата влияют на здоровье человека?")
+
+
+
+@bot.message_handler(commands=['Почему некоторые технологии, например, определенные методы геоинженерии, вызывают споры в научном сообществе?'])
+def disputes_in_the_scientific_community(message):
+    bot.send_message(message.chat.id, "Некоторые технологии, такие как геоинженерия, вызывают споры из-за их непредсказуемых экологических рисков и этических последствий.")
+
+
+@bot.message_handler(commands=['Какие барьеры мешают более быстрому внедрению "зелёных" технологий?'])
+def barriers(message):
+    bot.send_message(message.chat.id, "Главными барьерами являются высокая стоимость внедрения и нехватка необходимой инфраструктуры.")
+
+
+@bot.message_handler(commands=['Почему важно распространять знания о климате и привлекать других?'])
+def choice_of_transport(message):
+    bot.send_message(message.chat.id, "Распространение знаний о климате помогает людям понять масштаб экологических угроз и мотивирует их к совместным действиям ради спасения планеты.")
+
+
+
+@bot.message_handler(commands=['Как вы можете сократить свой личный углеродный след в повседневной жизни?'])
+def personal_carbon_footprint(message):
+    bot.send_message(message.chat.id, "Вы можете сократить свой углеродный след, экономя энергию, меньше пользуясь автомобилем и уменьшая количество отходов.")
+
+
+@bot.message_handler(commands=['Как изменения климата влияют на здоровье человека?'])
+def human_health(message):
+    bot.send_message(message.chat.id, "Изменения климата вредят здоровью человека, вызывая экстремальную жару, распространение болезней и загрязнение воздуха.")
+
+
+Facts = [
+    "За последние полтора столетия средняя температура на поверхности Земли поднялась примерно на 1,2°C."
+    "Арктика — это самое быстро нагревающееся место на планете. Она теплеет примерно в 3–4 раза быстрее, чем остальные регионы Земли."
+    "В среднем по миру температура растет примерно на 0,18°C за каждые 10 лет, но в России этот темп выше — около 0,5°C за 10 лет."
+    "Естественный парниковый эффект жизненно необходим. Без него средняя температура на планете составляла бы не привычные нам значения, около –15°C."
+    "Примерно 37% всех выбросов парниковых газов связаны с производством еды и сельским хозяйством, а на метан от крупного рогатого скота приходится около 14,5%"
+    "Концентрация углекислого газа в атмосфере превысила отметку в 415 ppm (частей на миллион), чего не наблюдалось сотни тысяч лет."
+    "Подробную статистику и рост концентрации помогает отслеживать знаменитый «график Килинга», ведущийся с конца 1950-х годов."
+    "Аномальные волны жары, вызванные изменением климата, напрямую увеличивают нагрузку на сердечно-сосудистую систему и повышают риск инсультов."
+    "Ежегодно в мире тают миллионы тонн ледникового покрова, что постепенно ведет к повышению уровня Мирового океана."
+    "От последствий потепления сильнее всего страдают засушливые регионы (например, Сахара), небольшие островные государства и густонаселенные речные дельты в Азии."
+    "Орбита Земли меняет форму от вытянутой до более округлой с периодом примерно в 93 тысячи лет, что влияет на количество получаемого от Солнца тепла и чередование ледниковых периодов."
+    "Солнечная активность и вулканическая деятельность веками меняли температуру планеты, из-за чего климат на Земле никогда не был статичным."
+    "Сжигание ископаемого топлива и выбросы углекислого газа усиливают естественный парниковый эффект, задерживая тепло в атмосфере"
+    "Текущий нагрев планеты идет беспрецедентно быстро — быстрее, чем при естественных астрономических циклах."
+    "современное глобальное потепление в основном ускорено деятельностью человека, а не только естественными ритмами планеты."
+]
 
 
 
 @bot.message_handler(commands=['random_advice'])
-def random_advice_1(message):
-    bot.send_message(message.chat.id, "Привет")
-
-
-@bot.message_handler(commands=['Why do some technologies, for example, certain methods of geoengineering, spark debate in the scientific community?'])
-def disputes_in_the_scientific_community(message):
-    bot.send_message(message.chat.id, "Привет")
-
-
-@bot.message_handler(commands=['What barriers hinder the faster adoption of “green” technologies?'])
-def barriers(message):
-    bot.send_message(message.chat.id, "Привет")
-
-
-@bot.message_handler(commands=['Why is it important to spread knowledge about climate and engage others?'])
-def It_is_important_to_spread_knowledge(message):
-    bot.send_message(message.chat.id, "Привет")
-
-
-@bot.message_handler(commands=['Why is it important to spread knowledge about climate and engage others?'])
-def choice_of_transport(message):
-    bot.send_message(message.chat.id, "Привет")
-
-
-
-@bot.message_handler(commands=['How can you reduce your personal carbon footprint in everyday life?'])
 def personal_carbon_footprint(message):
-    bot.send_message(message.chat.id, "Привет")
+      random_fact = random.choice(Facts)
+      bot.send_message(message.chat.id, random_fact)
 
 
-@bot.message_handler(commands=['How do climate changes affect human health?'])
-def human_health(message):
-    bot.send_message(message.chat.id, "Привет")
 
+
+
+question = [
+    "Назови 3 причины глобального потепления 🌍",
+    "Назови 3 последствия таяния ледников 🏔️",
+    "Назови 3 экологичные привычки, которые спасут планету 🌱",
+    "Назови 3 парниковых газа 💨",
+    "Назови 3 возобновляемых источника энергии ☀️",
+    "Назови 3 вещи, которые можно сдать на переработку ♻️",
+    "Назови 3 страны, которые сильнее всего страдают от климатических изменений 🗺️",
+    "Назови 3 вещи, которые нельзя выбрасывать в обычный мусор 🔋"
+]
+
+@bot.message_handler(commands=['start_play'])
+def send_welcome(message):
+
+
+    welcome_text = (
+        "это игра ответь за 5 секунд"
+        "Я задаю тебе вопрос про глобальное потепление."
+        "У тебя есть ровно 5 секунд, чтобы написать и отправить ответ (нужно назвать 3 вещи)."
+
+    )
+def start_game(message):
+    question1 = random.choice(question)
+
+
+    bot.send_message(message.chat.id, f"ЗАДАНИЕ: {question1}", mode="Markdown")
+    time1 = time.time()
+    bot.register_next_step_handler(message, lambda msg: check_answer(msg, time1))
+
+def check_answer(message, time1):
+    time1 = time.time()
+    elapsed_time = round(time1 - time, 2)
+
+
+    if message.text == "Играть ":
+        start_game(message)
+        return
+
+    if elapsed_time <= 5.0:
+        result_text = (
+            f"Ты успел!"
+            f"Твое время: `{elapsed_time}` сек."
+            f"Твой ответ: {message.text}"
+            f"Отличные знания! Давай еще раз?"
+        )
+    else:
+        result_text = (
+            f"Время вышло"
+            f"Ты думал целых `{elapsed_time}` сек., а нужно было уложиться в 5!"
+            f"Попробуешь снова?"
+        )
+
+    bot.send_message(message.chat.id, result_text, parse_mode="Markdown")
 
 
 #engine.runAndWait()
