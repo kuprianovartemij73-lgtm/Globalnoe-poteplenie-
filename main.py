@@ -11,7 +11,7 @@ import random
 
 
 
-bot = telebot.TeleBot('8892087367:AAFzASUnMSeorbnu-KYUgZ1ZbvLyaocu-Ms')
+bot = telebot.TeleBot('##############################################')
 
 
 
